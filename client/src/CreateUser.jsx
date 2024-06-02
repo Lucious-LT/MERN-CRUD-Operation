@@ -19,15 +19,15 @@ function CreateUsers() {
 
 
   return (
-    <div className="flex h-screen justify-center bg-slate-800">
-      <div className='w-1/2 h-1/2 bg-slate-100 rounded p-5 mt-20 '>
+     <div className="flex justify-center mt-9">
+      <div className="w-2/2 h-fit bg-gray-200 border p-5 m-0 rounded-lg">
         <form onSubmit ={Submit}  >
-                <h2>Create User</h2>
+                <h2 className="flex justify-center mt-2">Create User</h2>
           <div className="mb-2">
           <label htmlFor=''>Name</label>
             <input type ="text" 
             placeholder='Enter Name'
-            className='form-control'
+             className="mb-2 p-2 w-full border border-gray-300 rounded"
             onChange={(e)=> setName(e.target.value)}
             />
              </div>
@@ -35,7 +35,7 @@ function CreateUsers() {
             <label htmlFor=''>Email</label>
             <input type ="text" 
             placeholder='Enter Name'
-            className='form-control'
+             className="mb-2 p-2 w-full border border-gray-300 rounded"
              onChange={(e)=> setEmail(e.target.value)}
             />
             </div>
@@ -44,12 +44,12 @@ function CreateUsers() {
             <label htmlFor=''>Age</label>
             <input type ="text" 
             placeholder='Enter Name'
-            className='form-control'
+             className="mb-2 p-2 w-full border border-gray-300 rounded"
              onChange={(e)=> setAge(e.target.value)}
             />
              </div>
 
-              <button  className=' bg-green-600 rounded'>Create+</button>
+              <button  className="bg-blue-500 justify-center text-white px-4 py-2 rounded mt-4">Create+</button>
 
 
 

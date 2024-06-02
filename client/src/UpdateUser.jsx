@@ -40,7 +40,7 @@ function UpdateUsers() {
           <label htmlFor=''>Name</label>
             <input type ="text"
             placeholder='Enter Name'
-            className='form-control'
+             className="mb-2 p-2 w-full border border-gray-300 rounded"
              value={name} onChange={(e)=> setName(e.target.value)}
             />
              </div>
@@ -48,7 +48,7 @@ function UpdateUsers() {
             <label htmlFor=''>Email</label>
             <input type ="text" 
             placeholder='Enter Name'
-            className='form-control'
+            className="mb-2 p-2 w-full border border-gray-300 rounded"
              value={email} onChange={(e)=> setEmail(e.target.value)}
             />
             </div>
@@ -58,12 +58,12 @@ function UpdateUsers() {
             <input type ="text" 
            
             placeholder='Enter Name'
-            className='form-control'
+            className="mb-2 p-2 w-full border border-gray-300 rounded"
             value={age} onChange={(e)=> setAge(e.target.value)}
             />
              </div>
  
-              <button className=' btn-primary'>Update User</button>
+              <button className="bg-green-500 text-white px-4 py-2 rounded mt-4">Update User</button>
 
 
 
