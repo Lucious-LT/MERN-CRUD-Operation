@@ -1,16 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {useParams, useNavigate} from 'react-router-dom'
 
 function UpdateUsers() {
+  const {id} = useParams()
   const [name, setName]= useState()
   const [email, setEmail]= useState()
   const [age, setAge]= useState() 
   const navigate =useNavigate()
 
   useEffect (() =>{
- axios.get('http://localhost:5001/getUser'+id)
+ axios.get('http://localhost:5001/'+id)
  .then(result=> console.log(result))
- .tcatch(err=> console.log(err))
+ .catch(err=> console.log(err))
+
 
   },[])
 
@@ -32,14 +34,18 @@ function UpdateUsers() {
             <label htmlFor=''>Email</label>
             <input type ="text" 
             placeholder='Enter Name'
-            className='form-control'/>
+            className='form-control'
+            onChange={(e)=> setEmail(e.target.value)}
+            />
             </div>
 
             <div className="mb-2">
             <label htmlFor=''>Age</label>
             <input type ="text" 
             placeholder='Enter Name'
-            className='form-control'/>
+            className='form-control'
+            onChange={(e)=> setAge(e.target.value)}
+            />
              </div>
  
               <button className=' btn-primary'>Update User</button>

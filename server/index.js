@@ -8,6 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// get all users
 
 app.get('/',  (req, res)=>{
   UserModel.find({})
@@ -24,6 +25,15 @@ app.post('/createUser',  (req, res) => {
   .then(users => res.json(users))
   .catch(err => res.json (err))
 });
+
+// get user by id
+app.get('/getUser/:id', (req, res) => {
+  const id = req.params.id;
+  UserModel.findById({id})
+  .then(users => res.json(users))
+  .catch(err => res.json(err))
+})
+
 
 
 
