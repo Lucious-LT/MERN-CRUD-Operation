@@ -1,5 +1,6 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useParams, useNavigate} from 'react-router-dom'
+import axios from 'axios'
 
 function UpdateUsers() {
   const {id} = useParams()
@@ -9,25 +10,38 @@ function UpdateUsers() {
   const navigate =useNavigate()
 
   useEffect (() =>{
- axios.get('http://localhost:5001/'+id)
- .then(result=> console.log(result))
+ axios.get('http://localhost:5001/getUser/'+id)
+ .then(result=> {console.log(result)
+  setName(result.data.name)
+  setEmail(result.data.email)
+  setAge(result.data.age)
+ })
  .catch(err=> console.log(err))
 
 
+
   },[])
+
+  const Update = (e) => {
+    e.preventDefault();
+    axios.put('http://localhost:5001/updateUser/'+id, {name, email, age})
+    .then(result=> {console.log(result)})
+    .catch(err=> console.log(err))
+    navigate('/')
+  }
 
 
   return (
     <div className="flex h-screen justify-center bg-slate-800">
       <div className='w-1/2 h-1/2 bg-slate-100 rounded p-5 mt-20 '>
-        <form onSubmit={Submit} >
+        <form onSubmit={Update}>
                 <h2>Update User</h2>
           <div className="mb-2">
           <label htmlFor=''>Name</label>
-            <input type ="text" 
+            <input type ="text"
             placeholder='Enter Name'
             className='form-control'
-            onChange={(e)=> setName(e.target.value)}
+             value={name} onChange={(e)=> setName(e.target.value)}
             />
              </div>
             <div className="mb-2">
@@ -35,16 +49,17 @@ function UpdateUsers() {
             <input type ="text" 
             placeholder='Enter Name'
             className='form-control'
-            onChange={(e)=> setEmail(e.target.value)}
+             value={email} onChange={(e)=> setEmail(e.target.value)}
             />
             </div>
 
             <div className="mb-2">
             <label htmlFor=''>Age</label>
             <input type ="text" 
+           
             placeholder='Enter Name'
             className='form-control'
-            onChange={(e)=> setAge(e.target.value)}
+            value={age} onChange={(e)=> setAge(e.target.value)}
             />
              </div>
  
