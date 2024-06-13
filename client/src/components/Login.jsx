@@ -16,6 +16,7 @@ function Login() {
       e.preventDefault();
       axios.post('http://localhost:5001/login', {email, password})
         .then(result => {
+          console.log("login:", result.data)
           if (result.data.Status === 'Login successful') {
             if (result.data.role === 'admin') {
               window.alert('Admin logged successfully');

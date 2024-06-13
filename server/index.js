@@ -5,10 +5,11 @@ const UserModel = require('./model/Users');
 const User = require('./model/User');
 // const { json } = require('express');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser');
-
 const app = express();
+
+
 app.use(cors({
   origin: 'http://localhost:5173',
   methods: ['GET', 'POST'],
@@ -18,13 +19,46 @@ app.use(express.json());
 app.use(cookieParser());
 
 
+
+
+
+
+// Create a user
+const verifyUser = (req, res, next) => {
+  const token = req.cookies.token;
+  if (token) {
+    return re.json('User not found')
+  } else {  
+    jwt.verify(token, 'SECRETKEY', (err, decoded) => {
+      if (err) {
+        return res.json('Invalid token')
+      }else {
+        if (decoded.role === 'admin') {
+          next();
+        }
+        else {
+          return res.json("not admin")
+        }
+      }
+    }
+    )
+  }
+}
+
+app.get ('CreateUser', verifyUser, (req, res) => { 
+  res.json("Success")
+})
+
+
+
+
 // Signup
 app.post('/register', (req, res) => {
   const {name, email, password} = req.body;
   bcrypt.hash(password, 10)
   .then ((hash) => {
   User.create({name, email, password: hash})
-  .then(user => res.json({status: 'User registered successfully', user}))
+  .then(user => res.json({status: 'Success', user}))
   .catch(err => res.json(err))
 })
 })
@@ -53,35 +87,6 @@ app.post('/login', (req, res) => {
 
 })
  
-    
-   
-    
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // get all users
 
 app.get('/',  (req, res)=>{
@@ -130,7 +135,7 @@ app.delete('/deleteUser/:id', (req, res) => {
 
 
 // Connect to MongoDB
-mongoose.connect("mongodb+srv://luciousudemezue:lucious0801a,H@bookstore.tq8nutk.mongodb.net/bookstore")
+mongoose.connect("mongodb+srv://crud-challenge:lucious0801a,H@cluster0.asqoaw8.mongodb.net/crud");
 
 app.listen(5001, () => {
     console.log('Server is running on port 5001');

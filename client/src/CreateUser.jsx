@@ -1,12 +1,13 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from 'axios'
-import {useNavigate} from 'react-router-dom'
+import {Navigate, useNavigate} from 'react-router-dom'
 
 
 function CreateUsers() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
+ 
   const navigate =useNavigate()
 
   const Submit= (e) => {
@@ -16,6 +17,8 @@ function CreateUsers() {
     .catch(err => console.log(err))
     navigate('/')
   }
+
+
 
 
   return (

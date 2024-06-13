@@ -30,6 +30,20 @@ function UpdateUsers() {
     navigate('/')
   }
 
+    useEffect (() =>{
+
+      axios.get('http://localhost:5001/CreateUser')
+        .then(result => {
+        if (result.data.role === 'Success') {
+          setSuccess("You are authorized to view this page")
+        } else {
+          navigate('/')
+        }
+        })
+        .catch(err => console.log(err));
+    
+  },[])
+
 
   return (
     <div className="flex h-screen justify-center bg-slate-800">
